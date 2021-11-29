@@ -1,0 +1,1 @@
+docker run -it -p 8083:8080 throttling-task:latest bash
