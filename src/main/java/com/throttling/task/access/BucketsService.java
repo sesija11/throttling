@@ -1,13 +1,13 @@
 package com.throttling.task.access;
 
 import com.throttling.task.access.interfaces.IBucket;
-import com.throttling.task.access.interfaces.IBucketsController;
+import com.throttling.task.access.interfaces.IBucketsService;
 
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-class BucketsController implements IBucketsController {
+class BucketsService implements IBucketsService {
     private final Map<String, IBucket> buckets = new ConcurrentHashMap<>();
 
     @Override

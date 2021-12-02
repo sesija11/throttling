@@ -5,13 +5,13 @@ import com.throttling.task.access.interfaces.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-public class AccessController implements IAccessController {
-    private final IBucketsController bucketController;
-    private final IRateController rateController;
+public class AccessService implements IAccessService {
+    private final IBucketsService bucketController;
+    private final IRateService rateController;
     private final ISession session = new Session();
     private final ITask optimizer;
 
-    public AccessController(Short minutes, Short bursts) throws Exception {
+    public AccessService(int minutes, int bursts) throws Exception {
 
         if (minutes < 1 || bursts < 1)
             throw new Exception("The number of minutes and bursts must be more than 0.");
@@ -19,8 +19,8 @@ public class AccessController implements IAccessController {
         if (minutes > 1440)
             throw new Exception("The number of minutes must be less than 1440.");
 
-        bucketController = new BucketsController();
-        rateController = new RateController(bucketController, minutes.intValue(), bursts.intValue());
+        bucketController = new BucketsService();
+        rateController = new RateService(bucketController, minutes, bursts);
         optimizer = new Optimizer(bucketController, session, (short) 24);
     }
 

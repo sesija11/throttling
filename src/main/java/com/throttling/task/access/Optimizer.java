@@ -1,13 +1,13 @@
 package com.throttling.task.access;
 
-import com.throttling.task.access.interfaces.IBucketsController;
+import com.throttling.task.access.interfaces.IBucketsService;
 import com.throttling.task.access.interfaces.ISession;
 import com.throttling.task.access.interfaces.ITask;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public record Optimizer(IBucketsController bucketsController,
+public record Optimizer(IBucketsService bucketsController,
                         ISession session,
                         short period) implements ITask {
 

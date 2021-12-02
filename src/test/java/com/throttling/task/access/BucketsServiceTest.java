@@ -1,7 +1,7 @@
 package com.throttling.task.access;
 
 import com.throttling.task.access.interfaces.IBucket;
-import com.throttling.task.access.interfaces.IBucketsController;
+import com.throttling.task.access.interfaces.IBucketsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -9,13 +9,13 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BucketsControllerTest {
-    IBucketsController bucketsController;
+class BucketsServiceTest {
+    IBucketsService bucketsController;
 
     @BeforeEach
     @DisplayName("new BucketsController()")
     void setUp(){
-        bucketsController = new BucketsController();
+        bucketsController = new BucketsService();
     }
 
     @Nested

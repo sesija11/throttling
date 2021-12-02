@@ -1,18 +1,17 @@
-package com.throttling.task.model;
+package com.throttling.task.config;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource(value = {"classpath:access.properties"})
+@PropertySource(value = {"classpath:application.yml"})
 @ConfigurationProperties(prefix = "access")
-public class AccessProperties {
-    Short minutes;
-    Short bursts;
+public class AccessConfig {
+    int minutes;
+    int bursts;
 
-    public Short getMinutes() {
+    public int getMinutes() {
         return minutes;
     }
 
@@ -20,7 +19,7 @@ public class AccessProperties {
         this.minutes = minutes;
     }
 
-    public Short getBursts() {
+    public int getBursts() {
         return bursts;
     }
 

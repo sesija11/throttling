@@ -1,8 +1,8 @@
 package com.throttling.task.access;
 
 import com.throttling.task.access.interfaces.IBucket;
-import com.throttling.task.access.interfaces.IBucketsController;
-import com.throttling.task.access.interfaces.IRateController;
+import com.throttling.task.access.interfaces.IBucketsService;
+import com.throttling.task.access.interfaces.IRateService;
 import com.throttling.task.access.interfaces.ITask;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,13 +18,13 @@ import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RateControllerTest {
-    IBucketsController bucketsController;
+class RateServiceTest {
+    IBucketsService bucketsController;
 
     @BeforeEach
     @DisplayName("new BucketsController()")
     void setUp(){
-        bucketsController = new BucketsController();
+        bucketsController = new BucketsService();
     }
 
     @Nested
@@ -34,20 +34,20 @@ class RateControllerTest {
         @Test
         @DisplayName("burst count check")
         void getBurstCount() {
-            IRateController rateController = new RateController(bucketsController, 1, 6);
+            IRateService rateController = new RateService(bucketsController, 1, 6);
             assertEquals(rateController.getBurstCount(), 6);
         }
 
         @Test
         @DisplayName("average burst count check")
         void getAverageBurstCount() {
-            IRateController rateController1 = new RateController(bucketsController, 1, 150);
+            IRateService rateController1 = new RateService(bucketsController, 1, 150);
             assertAll("calculated rate is more than optimal",
                     () -> assertEquals(rateController1.getAverageBurstCount(), 1),
                     () -> assertEquals(rateController1.getRate(), 400)
             );
 
-            IRateController rateController2 = new RateController(bucketsController, 1, 200);
+            IRateService rateController2 = new RateService(bucketsController, 1, 200);
             assertAll("calculated rate is less than optimal",
                     () -> assertEquals(rateController2.getAverageBurstCount(), 2),
                     () -> assertEquals(rateController2.getRate(), 600)
@@ -57,7 +57,7 @@ class RateControllerTest {
         @Test
         @DisplayName("tokens adder")
         void start() throws InterruptedException {
-            IRateController rateController = new RateController(bucketsController, 1, 150);
+            IRateService rateController = new RateService(bucketsController, 1, 150);
             for (int i = 0; i < 1000000; i++) {
                 IBucket bucket = bucketsController.create(String.valueOf(i));
                 bucket.setMaxTokensCount(rateController.getBurstCount());

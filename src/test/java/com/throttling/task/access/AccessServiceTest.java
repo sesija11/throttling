@@ -1,6 +1,6 @@
 package com.throttling.task.access;
 
-import com.throttling.task.access.interfaces.IAccessController;
+import com.throttling.task.access.interfaces.IAccessService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,12 +13,12 @@ import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class AccessControllerTest {
+class AccessServiceTest {
 
     @Test
     @DisplayName("access check")
     void checkAccess() throws Exception {
-        IAccessController controller = new AccessController((short) 1, (short) 150);
+        IAccessService controller = new AccessService((short) 1, (short) 150);
         controller.start();
 
         AtomicBoolean check1 = new AtomicBoolean(true);

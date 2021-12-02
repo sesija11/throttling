@@ -1,7 +1,7 @@
 package com.throttling.task.access;
 
 import com.throttling.task.access.interfaces.IBucket;
-import com.throttling.task.access.interfaces.IBucketsController;
+import com.throttling.task.access.interfaces.IBucketsService;
 import com.throttling.task.access.interfaces.ISession;
 import com.throttling.task.access.interfaces.ITask;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +19,7 @@ class OptimizerTest {
     @Test
     @DisplayName("optimization check")
     void start() throws InterruptedException, IOException {
-        IBucketsController bucketController = new BucketsController();
+        IBucketsService bucketController = new BucketsService();
         ISession session = new Session();
 
         for (int i = 0; i < 10; i++) {

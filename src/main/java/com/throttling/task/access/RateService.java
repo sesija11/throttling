@@ -1,20 +1,20 @@
 package com.throttling.task.access;
 
-import com.throttling.task.access.interfaces.IBucketsController;
-import com.throttling.task.access.interfaces.IRateController;
+import com.throttling.task.access.interfaces.IBucketsService;
+import com.throttling.task.access.interfaces.IRateService;
 import com.throttling.task.access.interfaces.ITask;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-class RateController implements IRateController, ITask {
-    private final IBucketsController bucketsController;
+class RateService implements IRateService, ITask {
+    private final IBucketsService bucketsController;
     private final Integer burstCount;
     private final Integer averageBurstCount;
     private final Integer rate;
     private final int optimalRate = 400;
 
-    public RateController(IBucketsController bucketsController, Integer minutes, Integer burstCount) {
+    public RateService(IBucketsService bucketsController, Integer minutes, Integer burstCount) {
 
         this.bucketsController = bucketsController;
         this.burstCount = burstCount;

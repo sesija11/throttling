@@ -1,8 +1,8 @@
 package com.throttling.task.controller;
 
-import com.throttling.task.access.AccessController;
-import com.throttling.task.access.interfaces.IAccessController;
-import com.throttling.task.model.AccessProperties;
+import com.throttling.task.access.AccessService;
+import com.throttling.task.access.interfaces.IAccessService;
+import com.throttling.task.config.AccessConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("")
 public class AccessIPController {
-    private IAccessController accessController;
+    private IAccessService accessController;
 
     @Autowired
-    private AccessProperties accessProperties;
+    private AccessConfig accessConfig;
 
     @PostConstruct
     public void init() throws Exception {
-        accessController = new AccessController(accessProperties.getMinutes(), accessProperties.getBursts());
+        accessController = new AccessService(accessConfig.getMinutes(), accessConfig.getBursts());
         accessController.start();
     }
 
