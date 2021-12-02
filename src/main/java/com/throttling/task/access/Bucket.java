@@ -1,29 +1,15 @@
 package com.throttling.task.access;
 
 import com.throttling.task.access.interfaces.IBucket;
+import lombok.Data;
 
+@Data
 class Bucket implements IBucket {
     private int excessBurstSize = 0;
     private int committedBurstSize = 0;
     private int extraTokens = 0;
     private int baseTokens = 0;
     private Short sessionID = -1;
-
-    public int getExcessBurstSize() {
-        return excessBurstSize;
-    }
-
-    public int getCommittedBurstSize() {
-        return committedBurstSize;
-    }
-
-    public int getExtraTokens() {
-        return extraTokens;
-    }
-
-    public int getBaseTokens() {
-        return baseTokens;
-    }
 
     @Override
     public void setMaxTokensCount(Integer count) {
@@ -59,15 +45,5 @@ class Bucket implements IBucket {
             extraTokens = extraTokens - 1;
         }
         return true;
-    }
-
-    @Override
-    public Short getSessionID() {
-        return sessionID;
-    }
-
-    @Override
-    public void setSessionID(Short sessionID) {
-        this.sessionID = sessionID;
     }
 }

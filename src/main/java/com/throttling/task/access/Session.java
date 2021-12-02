@@ -1,20 +1,17 @@
 package com.throttling.task.access;
 
 import com.throttling.task.access.interfaces.ISession;
+import lombok.Data;
 
 import java.util.Random;
 
+@Data
 class Session implements ISession {
-    private Short sessionID = -1;
     private final Random random = new Random();
+    private Short sessionID = -1;
 
     public Session() {
         updateSessionID();
-    }
-
-    @Override
-    public Short getSessionID() {
-        return sessionID;
     }
 
     @Override

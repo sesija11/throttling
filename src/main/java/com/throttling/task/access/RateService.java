@@ -3,10 +3,12 @@ package com.throttling.task.access;
 import com.throttling.task.access.interfaces.IBucketsService;
 import com.throttling.task.access.interfaces.IRateService;
 import com.throttling.task.access.interfaces.ITask;
+import lombok.Data;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+@Data
 class RateService implements IRateService, ITask {
     private final IBucketsService bucketsController;
     private final Integer burstCount;
@@ -29,21 +31,6 @@ class RateService implements IRateService, ITask {
             averageBurstCount = 1;
             rate = calculatedRate;
         }
-    }
-
-    @Override
-    public Integer getBurstCount() {
-        return burstCount;
-    }
-
-    @Override
-    public Integer getAverageBurstCount() {
-        return averageBurstCount;
-    }
-
-    @Override
-    public Integer getRate() {
-        return rate;
     }
 
     @Override

@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.5.6'
     id 'java'
+    id "io.freefair.aspectj" version "6.3.0"
 }
 
 group = 'com.throttling'
@@ -11,6 +12,7 @@ ext {
             springBoot: '2.5.6',
             gradle    : '7.3.1',
             jdk       : JavaVersion.VERSION_17,
+            aspectj   : "1.9.7",
     ]
 }
 
@@ -24,9 +26,14 @@ java {
     sourceCompatibility = version_.jdk
 }
 
+sourceSets.main.aspectj.srcDir "src/main/java"
+sourceSets.main.java.srcDirs = files()
+
 dependencies {
     implementation platform("org.springframework.boot:spring-boot-dependencies:$version_.springBoot")
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.aspectj:aspectjrt:$version_.aspectj"
+    implementation "org.aspectj:aspectjweaver:$version_.aspectj"
 
     compileOnly "org.projectlombok:lombok"
 
@@ -40,7 +47,6 @@ dependencies {
     testAnnotationProcessor "org.projectlombok:lombok"
 
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
-
     testCompileOnly "org.projectlombok:lombok"
 }
 
